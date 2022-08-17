@@ -27,6 +27,7 @@ use Klarna\Rest\Tests\Unit\TestCase;
 use Klarna\Rest\Transport\Connector;
 use Klarna\Rest\Transport\Exception\ConnectorException;
 use Klarna\Rest\Transport\UserAgent;
+use RuntimeException;
 
 /**
  * Unit test cases for the connector class.
@@ -62,7 +63,7 @@ class GuzzleConnectorTest extends TestCase
     /**
      * Set up the test fixtures.
      */
-    protected function setUp()
+    protected function setUp() :void
     {
         parent::setUp();
 
@@ -122,10 +123,8 @@ class GuzzleConnectorTest extends TestCase
             ->with($this->request)
             ->will($this->throwException($exception));
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Something went terribly wrong'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Something went terribly wrong');
 
         $this->object->send($this->request);
     }
@@ -148,10 +147,8 @@ class GuzzleConnectorTest extends TestCase
             ->with($this->request)
             ->will($this->throwException($exception));
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Something went terribly wrong'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Something went terribly wrong');
 
         $this->object->send($this->request);
     }
@@ -175,10 +172,8 @@ class GuzzleConnectorTest extends TestCase
             ->with($this->request)
             ->will($this->throwException($exception));
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Something went terribly wrong'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Something went terribly wrong');
 
         $this->object->send($this->request);
     }
@@ -201,10 +196,8 @@ class GuzzleConnectorTest extends TestCase
             ->with($this->request)
             ->will($this->throwException($exception));
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Something went terribly wrong'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Something went terribly wrong');
 
         $this->object->send($this->request);
     }
@@ -236,10 +229,8 @@ class GuzzleConnectorTest extends TestCase
             ->with($this->request)
             ->will($this->throwException($exception));
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Something went terribly wrong'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Something went terribly wrong');
 
         $this->object->send($this->request);
     }
@@ -284,7 +275,7 @@ class GuzzleConnectorTest extends TestCase
 
         $userAgent = $connector->getUserAgent();
         $this->assertInstanceOf('Klarna\Rest\Transport\UserAgent', $userAgent);
-        $this->assertContains('Library/Klarna.kco_rest_php', strval($userAgent));
+        $this->assertStringContainsString('Library/Klarna.kco_rest_php', strval($userAgent));
     }
 
     /**

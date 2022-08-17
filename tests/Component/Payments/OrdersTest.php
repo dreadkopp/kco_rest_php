@@ -20,6 +20,7 @@
 namespace Klarna\Rest\Tests\Component\Payments;
 
 use GuzzleHttp\Psr7\Response;
+use Klarna\Exceptions\NotApplicableException;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\Payments\Orders;
 use Klarna\Rest\Tests\Component\ResourceTestCase;
@@ -136,7 +137,7 @@ JSON;
      */
     public function testFetch()
     {
-        $this->setExpectedException('Klarna\Exceptions\NotApplicableException');
+        $this->expectException(NotApplicableException::class);
 
         $reports = new Orders($this->connector, 'test');
         $reports->fetch();

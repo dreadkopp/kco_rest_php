@@ -26,6 +26,7 @@ use Klarna\Rest\Tests\Unit\TestCase;
 use Klarna\Rest\Transport\Connector;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\Transport\Exception\ConnectorException;
+use RuntimeException;
 
 /**
  * Unit test cases for the order resource.
@@ -128,10 +129,8 @@ class OrderTest extends TestCase
         $order = new Order($this->connector, '12345');
         $order['data'] = 'is overwritten';
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 204'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 204');
 
         $order->fetch();
     }
@@ -162,10 +161,9 @@ class OrderTest extends TestCase
         $order = new Order($this->connector, '12345');
         $order['data'] = 'is overwritten';
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected Content-Type header received: text/plain'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected Content-Type header received: text/plain');
+
 
         $order->fetch();
     }
@@ -216,10 +214,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->acknowledge();
     }
@@ -270,10 +266,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->cancel();
     }
@@ -328,10 +322,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->updateAuthorization($data);
     }
@@ -382,10 +374,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->extendAuthorizationTime();
     }
@@ -440,10 +430,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->updateMerchantReferences($data);
     }
@@ -498,10 +486,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->updateCustomerDetails($data);
     }
@@ -561,10 +547,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->refund($data);
     }
@@ -615,10 +599,8 @@ class OrderTest extends TestCase
 
         $order = new Order($this->connector, '12345');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $order->releaseRemainingAuthorization();
     }

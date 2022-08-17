@@ -25,6 +25,7 @@ use Klarna\Rest\Tests\Unit\TestCase;
 use Klarna\Rest\Transport\Connector;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\Transport\Exception\ConnectorException;
+use RuntimeException;
 
 /**
  * Unit test cases for the capture resource.
@@ -131,10 +132,8 @@ class CaptureTest extends TestCase
         $capture = new Capture($this->connector, '/orders/1', '2');
         $capture['data'] = 'is overwritten';
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 204'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 204');
 
         $capture->fetch();
     }
@@ -166,10 +165,9 @@ class CaptureTest extends TestCase
         $capture = new Capture($this->connector, '/orders/1', '2');
         $capture['data'] = 'is overwritten';
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected Content-Type header received: text/plain'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected Content-Type header received: text/plain');
+
 
         $capture->fetch();
     }
@@ -230,10 +228,9 @@ class CaptureTest extends TestCase
         
         $capture = new Capture($this->connector, '/orders/1');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 204'
-        );
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 204');
 
         $capture->create(['data' => 'goes here']);
     }
@@ -260,10 +257,8 @@ class CaptureTest extends TestCase
 
         $capture = new Capture($this->connector, '/orders/1');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Response is missing a Location header'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Response is missing a Location header');
 
         $capture->create(['data' => 'goes here']);
     }
@@ -318,10 +313,8 @@ class CaptureTest extends TestCase
 
         $capture = new Capture($this->connector, '/orders/1', '2');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $capture->addShippingInfo($data);
     }
@@ -377,10 +370,8 @@ class CaptureTest extends TestCase
 
         $capture = new Capture($this->connector, '/orders/1', '2');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $capture->updateCustomerDetails($data);
     }
@@ -431,10 +422,8 @@ class CaptureTest extends TestCase
 
         $capture = new Capture($this->connector, '/orders/1', '2');
 
-        $this->setExpectedException(
-            'RuntimeException',
-            'Unexpected response status code: 200'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage( 'Unexpected response status code: 200');
 
         $capture->triggerSendout();
     }

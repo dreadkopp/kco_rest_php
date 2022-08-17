@@ -20,6 +20,7 @@
 namespace Klarna\Rest\Tests\Component\Settlements;
 
 use GuzzleHttp\Psr7\Response;
+use Klarna\Exceptions\NotApplicableException;
 use Klarna\Rest\Settlements\Payouts;
 use Klarna\Rest\Tests\Component\ResourceTestCase;
 
@@ -36,7 +37,7 @@ class PayoutsTest extends ResourceTestCase
      */
     public function testFetch()
     {
-        $this->setExpectedException('Klarna\Exceptions\NotApplicableException');
+        $this->expectException(NotApplicableException::class);
 
         $reports = new Payouts($this->connector);
         $reports->fetch();

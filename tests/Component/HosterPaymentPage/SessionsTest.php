@@ -23,6 +23,7 @@ use GuzzleHttp\Psr7\Response;
 use Klarna\Rest\HostedPaymentPage\Sessions;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\Tests\Component\ResourceTestCase;
+use RuntimeException;
 
 /**
  * Component test cases for the HPP session resource.
@@ -152,10 +153,8 @@ JSON;
      */
     public function testDisableUndefinedSession()
     {
-        $this->setExpectedException(
-            'RuntimeException',
-            'HPP Session ID is not defined'
-        );
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage('HPP Session ID is not defined');
 
         $session = new Sessions($this->connector);
         $session->disable();

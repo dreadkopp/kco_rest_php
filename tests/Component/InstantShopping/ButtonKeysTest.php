@@ -23,6 +23,7 @@ use GuzzleHttp\Psr7\Response;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\InstantShopping\ButtonKeys;
 use Klarna\Rest\Tests\Component\ResourceTestCase;
+use RuntimeException;
 
 /**
  * Component test cases for the Instant Shopping Button Keys resource.
@@ -160,6 +161,7 @@ JSON;
      */
     public function testRetrieveException()
     {
+        $this->expectException(RuntimeException::class);
         $button = new ButtonKeys($this->connector);
         $button->retrieve();
     }

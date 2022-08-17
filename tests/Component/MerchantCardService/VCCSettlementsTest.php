@@ -20,6 +20,7 @@
 namespace Klarna\Rest\Tests\Component\MerchantCardService;
 
 use GuzzleHttp\Psr7\Response;
+use Klarna\Exceptions\NotApplicableException;
 use Klarna\Rest\Transport\Method;
 use Klarna\Rest\MerchantCardService\VCCSettlements;
 use Klarna\Rest\Tests\Component\ResourceTestCase;
@@ -75,7 +76,7 @@ JSON;
      */
     public function testFetch()
     {
-        $this->setExpectedException('Klarna\Exceptions\NotApplicableException');
+        $this->expectException(NotApplicableException::class);
 
         $vccSettlements = new VCCSettlements($this->connector);
         $vccSettlements->fetch();
